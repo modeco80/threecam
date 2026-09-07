@@ -1,0 +1,60 @@
+
+/* Include the api file */
+INCLUDE bxapi/ld/@REGION@.ld
+
+BLOB_LOAD_ADDRESS = 0x000a0000;
+
+SECTIONS {
+
+	. = BLOB_LOAD_ADDRESS;
+	_begin = BLOB_LOAD_ADDRESS;
+
+	.text ALIGN(4) : {
+		*(.text)
+		*(.text.*)
+    	*(.gnu.linkonce.t*)
+    	. = ALIGN(4);
+	}
+
+	.ctors : {
+		KEEP (*crtbegin.o(.ctors))
+		KEEP (*(EXCLUDE_FILE (*crtend.o) .ctors))
+	    KEEP (*(SORT(.ctors.*)))
+		KEEP (*(.ctors))	
+	}
+	
+  	.dtors : {
+		KEEP (*crtbegin.o(.dtors))
+		KEEP (*(EXCLUDE_FILE (*crtend.o) .dtors))
+		KEEP (*(SORT(.dtors.*)))
+		KEEP (*(.dtors))
+  	}
+
+	/DISCARD/ : {
+		/* Ignore .reginfo. It is not needed and adds bloat */
+		*(.reginfo)
+	}
+
+	.data : { 
+		*(.data)
+		*(.data.*)
+    	*(.gnu.linkonce.d*)
+    	. = ALIGN(4);
+	 }
+
+	.rodata : {
+		*(.rodata)
+		*(.rodata.*)
+		*(.gnu.linkonce.r*)
+		. = ALIGN(4);
+	}
+	.rdata : { *(.rdata) }
+	.lit8 : { *(.lit8) }
+	.lit4 : { *(.lit4) }
+	.sdata : { *(.sdata) }
+	.sbss : { _fbss = .; *(.sbss) *(.scommon) }
+	.bss : { *(.bss) }
+
+	. = ALIGN(4);
+	_end = .;
+}
