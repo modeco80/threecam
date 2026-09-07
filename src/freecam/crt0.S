@@ -27,7 +27,7 @@ _start:
 #ifdef SSX3_HOOK
 	addiu sp, sp, -0x10
 #else
-	addiu sp, sp, -0x10
+	addiu sp, sp, -0x8
 #endif
 	sw ra, (sp)
 	sw gp, 4(sp)

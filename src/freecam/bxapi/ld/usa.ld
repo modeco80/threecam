@@ -12,10 +12,21 @@ vsprintf = 0x004186c8;
 
 ModHookPoint = 0x0031afb4;
 
+SSXApp = 0x004a28a8;
+
 /* Memory allocation. See bx/memman.h for what these are actually */
 bxNew__FUi = 0x00317d20;
 bxDelete__FPv = 0x00317e50;
 
-/* TODO cCamera et cetera */
+/* cCamera */
+update__7cCamera = 0x0015df98;
+setCurrentController__7cCamera18eCamControllerType = 0x0015dfd8;
 
-/* TODO cPauseState variables. we will need to make an internal version of push/pop since it got inlined */
+/* cPauseState variables */
+_11cPauseState$FlagsTable = 0x004a2a50;
+_11cPauseState$Flags = 0x004a2a50;
+_11cPauseState$StackIdx = 0x004a2a54;
+_11cPauseState$Stack = 0x005366e8;
+
+/* cInput */
+getState__6cInput11eInputState = 0x00320c48;

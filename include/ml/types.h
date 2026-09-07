@@ -70,4 +70,7 @@ typedef ptrdiff_t isize;
 /// Defines a variable which has the type of the expression.
 #define ml_autovar(name, xpr) __typeof__((xpr)) name = xpr
 
+#define __ML_STATIC_ASSERT_CONCAT_HELPER(a, b) a##b
+#define __ML_STATIC_ASSERT_CONCAT(a, b) __ML_STATIC_ASSERT_CONCAT_HELPER(a, b)
+#define ML_STATIC_ASSERT(x) typedef u8 __ML_STATIC_ASSERT_CONCAT(__static_assert, __LINE__)[(x) ? 0 : -1]
 #endif

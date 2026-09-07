@@ -10,7 +10,6 @@ RUNTIME := \
 	runtime/ml_abort.cpp
 
 UTILS := \
-	utils/random.cpp \
 	utils/log.cpp \
 	utils/hook/trampoline.cpp
 
@@ -25,11 +24,10 @@ LINKLIBS := \
 	../ml/cxx/obj/libml3_cxx.a \
 	../ml/hw/obj/libml3_hw.a
 
-# Set user C flags:
-# Tell some headers which are shared between the IRC agent
-# and the blob that they are being used inside the blob,
-# so they declare things properly.
+# User C/CXX flags.
 USER_CFLAGS = -DMOD_REGION_$(REGION) -I bxapi/include
+USER_CXXFLAGS := \
+	-Wno-pmf-conversions
 
 # Release builds (to remove mlASSERTs:)
 ifeq ($(DEBUG),0)
@@ -40,7 +38,8 @@ endif
 EXTRATARGETS_PRE = $(LINKSCRIPT)
 EXTRATARGETS_POST = $(GAME_$(GAME)_$(REGION)_PNACH)
 
-# Used to make sure that we rebuild the pnach if mkpnach changes
+# All files that make up the mkpnach tool.
+# Used to make sure that we rebuild the pnach if the mkpnach Python code is changed.
 MKPNACH_DEPS := \
 	$(TOP)/tools/mkpnach.py \
 	$(TOP)/tools/utils/elf.py \
