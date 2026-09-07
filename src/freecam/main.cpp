@@ -21,13 +21,11 @@ CLASS_HOOK0(void, cCamera, update) {
 		freecamEnabled = !freecamEnabled;
 		utilLogf(LogInfo, "3Cam: Free camera is %s.", freecamEnabled ? "ENABLED" : "DISABLED");
 		if(freecamEnabled) {
-			// kick on manual cam
 			manualCam = klass;
-
 			klass->setCurrentController(eCamController_Manual);
 			cPauseState::push(PauseState_ManualCam);
 		} else {
-			// Reset camera back to chase controller.
+			// Reset camera back to chase controller and unpause the game
 			manualCam = nil(cCamera*);
 			klass->setCurrentController(eCamController_Chase);
 			cPauseState::pop();
