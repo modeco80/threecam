@@ -10,6 +10,13 @@ cCamera* manualCam = nil(cCamera*);
 
 float restoreFov;
 
+void freecamResetPosition() {
+	t4Vector pos = SSXApp->game->ai->riders[0]->position;
+	pos.v[2] += 400.f;
+	manualCam->pManualCamController->pManualAlgo->position = pos;
+}
+
+
 // TODO
 // EditorZoomIn = L2.held; fov -= (inputs[0]->getState(eInputState_EditorZoomIn) * 10.f)
 // EditorZoomOut = L1.held; fov += (inputs[0]->getState(eInputState_EditorZoomIn) * 10.f)
@@ -20,12 +27,10 @@ void freecamHandleInputs() {
 		SSXApp->game->ai->riders[0]->substate[0] = 1;
 		SSXApp->game->ai->riders[0]->setPosition(manualCam->getPosition());
 	}
-}
 
-void freecamResetPosition() {
-	t4Vector pos = SSXApp->game->ai->riders[0]->position;
-	pos.v[2] += 400.f;
-	manualCam->pManualCamController->pManualAlgo->position = pos;
+	if(SSXApp->inputs[0]->getState(eInputState_VoipOnOff)) {
+		freecamResetPosition();
+	}
 }
 
 CLASS_HOOK0(void, cCamera, update) {
