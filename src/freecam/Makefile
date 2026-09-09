@@ -16,7 +16,8 @@ UTILS := \
 SOURCES := \
 	$(RUNTIME) \
 	$(UTILS) \
-	main.cpp
+	main.cpp \
+	ui/freecamhud.cpp
 
 LINKSCRIPT = $(OBJDIR)/freecam_blob.ld
 LINKLIBS := \

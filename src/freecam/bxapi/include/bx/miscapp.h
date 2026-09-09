@@ -34,6 +34,11 @@ public:
 	cAI* ai;
 	u8 pad2[0x14];
 	cFont* debugFont;
+
+	void load();
+	void purge();
+	void update();
+	i32 render();
 };
 
 ML_STATIC_ASSERT(ml_offsetof(cGame, debugFont) == 0x24);
@@ -62,7 +67,7 @@ enum tPauseState {
 const static u32 kPauseStackSize = 7;
 
 class cPauseState {
-	static i32 FlagsTable[8];
+	static const i32 FlagsTable[8];
 	static i32 StackIdx;
 	static i32 Stack[kPauseStackSize];
 	static i32 Flags;

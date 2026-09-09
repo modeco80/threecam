@@ -17,7 +17,7 @@ ml_noreturn void mlAbortAssertionFailure(const char* pszExpression, const char* 
 #define __assert_stringify(x) ___assert_stringify(x)
 
 #ifdef NDEBUG
-	#define mlASSERT(xpr)
+	#define mlASSERT(xpr) (void)0
 #else
 	#define mlASSERT(xpr)                                                         \
 		if(!(xpr)) {                                                              \

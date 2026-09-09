@@ -3,9 +3,7 @@
 #include "../utils/log.hpp"
 
 extern "C" ml_noreturn void mlAbort(const char* msg) {
-	utilLog(LogErr, "========================================================");
-	utilLogf(LogErr, "ml abort: %s", msg);
-	utilLog(LogErr, "========================================================");
+	utilLogf(LogErr, "ML abort: %s", msg);
 	// maybe dump stack?
 	// Spin forever to uphold never returning
 	while(1) {
