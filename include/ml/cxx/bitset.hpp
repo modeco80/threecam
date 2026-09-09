@@ -18,7 +18,7 @@ namespace ml {
 
 			u32 bitArray[ArraySize];
 
-#define BIT_SIZE sizeof(u32) * 8
+#define BIT_SIZE (sizeof(u32) * 8)
 #define BIT_ARRAY_INDEX(index) (u32)(index / BIT_SIZE)
 #define MAKE_MASK(index) ((u32)1 << (index % BIT_SIZE))
 
@@ -37,7 +37,7 @@ namespace ml {
 			void set(u32 index) {
 				if(index > NrBits)
 					return;
-				bitArray[BIT_ARRAY_INDEX(index)] = MAKE_MASK(index);
+				bitArray[BIT_ARRAY_INDEX(index)] |= MAKE_MASK(index);
 			}
 
 			void unset(u32 index) {
@@ -50,7 +50,7 @@ namespace ml {
 				if(index > NrBits)
 					return false;
 				const u32 MASK = MAKE_MASK(index);
-				return bitArray[BIT_ARRAY_INDEX(index)] & MASK == MASK;
+				return (bitArray[BIT_ARRAY_INDEX(index)] & MASK) == MASK;
 			}
 
 			bool operator[](u32 index) const {
@@ -63,7 +63,7 @@ namespace ml {
 				for(u32 i = 0; i < NrBits; ++i) {
 					// manually inlining test() to make sure compiler isn't stupid
 					const u32 MASK = MAKE_MASK(i);
-					if(bitArray[BIT_ARRAY_INDEX(i)] & MASK == MASK)
+					if((bitArray[BIT_ARRAY_INDEX(i)] & MASK) == MASK)
 						count++;
 				}
 
