@@ -2,16 +2,48 @@
 #define BX_MISCAPP_H
 
 #include <ml/types.h>
+#include <bx/math.h>
 
 // dumping ground for misc. things
 
 class cInput;
 
+class cRider {
+public:
+	u8 state[4];
+	u8 substate[4];
+	u8 HACKpad[0x58];
+	u8 pad[0xb0];
+	t4Vector position;
+
+	void setPosition(const t4Vector& pos) {
+		position = pos;
+	}
+};
+
+class cAI {
+public:
+	u8 pad[0x28];
+	cRider* riders[6];
+};
+
+class cGame {
+public:
+	u8 pad[0xc];
+	cAI* ai;
+};
+
 class cSSXApp {
    public:
-	u8 pad[0xb0];
+	u8 pad[0x84];
+	cGame* game;
+	u8 pad2[0x28];
 	cInput* inputs[2];
 };
+
+// Make sure cSSXApp is valid
+ML_STATIC_ASSERT(ml_offsetof(cSSXApp, game) == 0x84);
+ML_STATIC_ASSERT(ml_offsetof(cSSXApp, inputs[0]) == 176);
 
 extern cSSXApp* SSXApp;
 
@@ -39,7 +71,7 @@ class cPauseState {
 
 	static void pop() {
 		StackIdx--;
-		// should be this, but it seems to hang. i might be stupid
+		// should be this, but it seems to make things unhappy and "hang". i might be stupid
 		// Flags = FlagsTable[Stack[StackIdx]];
 		Flags = 0;
 	}
