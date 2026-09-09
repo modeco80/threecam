@@ -6,7 +6,10 @@
 enum eInputState {
 	eInputState_CameraActivate = 0x2f,
 	// Will be reused as "put rider at position" input at a later date
-	eInputState_EditorHelp = 0x44
+	eInputState_EditorHelp = 0x44,
+	eInputState_EditorZoomIn = 0x4b,
+	eInputState_EditorZoomOut = 0x4c,
+	eInputState_VoipOnOff = 0xc8
 };
 
 class cInput {
