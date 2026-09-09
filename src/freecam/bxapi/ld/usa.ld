@@ -30,3 +30,4 @@ _11cPauseState$Stack = 0x005366e8;
 
 /* cInput */
 getState__6cInput11eInputState = 0x00320c48;
+getValue__6cInput11eInputState = 0x00320bf0;

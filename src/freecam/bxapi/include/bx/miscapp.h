@@ -7,6 +7,7 @@
 // dumping ground for misc. things
 
 class cInput;
+class cFont;
 
 class cRider {
 public:
@@ -31,7 +32,11 @@ class cGame {
 public:
 	u8 pad[0xc];
 	cAI* ai;
+	u8 pad2[0x14];
+	cFont* debugFont;
 };
+
+ML_STATIC_ASSERT(ml_offsetof(cGame, debugFont) == 0x24);
 
 class cSSXApp {
    public:

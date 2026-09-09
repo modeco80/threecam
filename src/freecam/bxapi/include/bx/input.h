@@ -9,7 +9,9 @@ enum eInputState {
 	eInputState_EditorHelp = 0x44, // select
 	eInputState_EditorZoomIn = 0x4b, // l2
 	eInputState_EditorZoomOut = 0x4c, // l1
+	eInputState_CVToggleDisplayMode = 0x5b, // triangle
 	eInputState_VoipOnOff = 0xc8 // r3
+
 };
 
 class cInput {

@@ -49,7 +49,7 @@ _start:
 	beq at, zero, .Lokay
 	nop
 
-	/* If we get here, chaosMain() > 0, so something went wrong.
+	/* If we get here, modMain() > 0, so something went wrong.
 		Call global destructors. */
 	jal __do_global_dtors
 	nop
