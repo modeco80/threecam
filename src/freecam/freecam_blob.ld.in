@@ -9,6 +9,11 @@ SECTIONS {
 	. = BLOB_LOAD_ADDRESS;
 	_begin = BLOB_LOAD_ADDRESS;
 
+	/* Alias ml memory allocation directly, since
+	 these functions are ABI compatiable. Saves some space */
+	mlMalloc = bxNew__FUi;
+	mlFree = bxDelete__FPv;
+
 	.text ALIGN(4) : {
 		*(.text)
 		*(.text.*)

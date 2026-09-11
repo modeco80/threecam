@@ -30,8 +30,10 @@ void freecamHandleInputs() {
 		cRider* pRider = getRider(0);
 		pRider->state = 0;
 		pRider->substate = 0;
-		//pRider->putAt(manualCam->getPosition(), manualCam->getPosition(), 0., 0);
+		//pRider->putAt(manualCam->getPosition(),t4Vector(), 1000., 5);
 		pRider->setPosition(manualCam->getPosition());
+		pRider->cleanupAfterPutAt(false);
+		//pRider->setPosition(manualCam->getPosition());
 
 		if(hudEnabled) {
 			freecamHUD->addNotification("Snapped rider to camera position");
@@ -127,23 +129,23 @@ extern "C" int modMain() {
 	// Hook game functions
 
 	if(!hook_cCamera_update.hook()) {
-		utilLog(LogErr, "Failed to hook cCamera::update().");
+		utilLogf(LogErr, "Failed to hook %s().", "cCamera::update");
 		return 1;
 	}
 	if(!hook_cGame_load.hook()) {
-		utilLog(LogErr, "Failed to hook cGame::load().");
+		utilLogf(LogErr, "Failed to hook %s().", "cGame::load");
 		return 1;
 	}
 	if(!hook_cGame_purge.hook()) {
-		utilLog(LogErr, "Failed to hook cGame::purge().");
+		utilLogf(LogErr, "Failed to hook %s().", "cGame::purge");
 		return 1;
 	}
 	if(!hook_cGame_update.hook()) {
-		utilLog(LogErr, "Failed to hook cGame::update().");
+		utilLogf(LogErr, "Failed to hook %s().", "cGame::update");
 		return 1;
 	}
 	if(!hook_cGame_render.hook()) {
-		utilLog(LogErr, "Failed to hook cGame::render().");
+		utilLogf(LogErr, "Failed to hook %s().", "cGame::render");
 		return 1;
 	}
 	return 0;

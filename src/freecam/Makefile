@@ -6,7 +6,6 @@ DEBUG ?= 0
 # needed to link the ml libs)
 RUNTIME := \
 	crt0.S \
-	runtime/ml_memory.cpp \
 	runtime/ml_abort.cpp
 
 UTILS := \
