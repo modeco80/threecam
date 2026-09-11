@@ -22,9 +22,9 @@ SOURCES := \
 
 LINKSCRIPT = $(OBJDIR)/freecam_blob.ld
 LINKLIBS := \
-	../ml/core/obj/libml3_core.a \
-	../ml/cxx/obj/libml3_cxx.a \
-	../ml/hw/obj/libml3_hw.a
+	../ml/lib/core/obj/libml3_core.a \
+	../ml/lib/cxx/obj/libml3_cxx.a \
+	../ml/lib/hw/obj/libml3_hw.a
 
 # User C/CXX flags.
 USER_CFLAGS = -DMOD_REGION_$(REGION) -I $(TOP)/src/bxapi/include

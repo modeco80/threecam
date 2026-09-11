@@ -12,9 +12,9 @@ $(SUBMAKE) -C $(1) $(2)
 endef
 
 define makeall
-$(call submake,src/ml/hw,$(1))
-$(call submake,src/ml/core,$(1))
-$(call submake,src/ml/cxx,$(1))
+$(call submake,src/ml/lib/hw,$(1))
+$(call submake,src/ml/lib/core,$(1))
+$(call submake,src/ml/lib/cxx,$(1))
 $(call submake,src/freecam,$(1))
 endef
 

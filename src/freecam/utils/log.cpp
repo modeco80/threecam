@@ -4,7 +4,7 @@
 #include <ml/abort.h>
 #include <ml/string.h>
 
-#include "../../ml/hw/eeuart.h"
+#include "../../ml/lib/hw/eeuart.h"
 
 inline const char* utilGetLogStamp(LogLevel level) {
 	switch(level) {

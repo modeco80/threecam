@@ -10,9 +10,10 @@ OBJCOPY := $(EE_TOOLSDIR)/bin/ee-objcopy
 OBJDUMP := $(EE_TOOLSDIR)/bin/ee-objdump
 STRIP := $(EE_TOOLSDIR)/bin/ee-strip
 
+ML_INCLUDE := -I$(TOP)/src/ml/include
 
-CCFLAGS := -G0 -O3 -ffreestanding -nostdlib -I$(TOP)/include $(USER_CFLAGS)
-CXXFLAGS := -G0 -O3 -ffreestanding -fno-rtti -fno-exceptions -nostdlib -I$(TOP)/include $(USER_CFLAGS) $(USER_CXXFLAGS)
+CCFLAGS := -G0 -O3 -ffreestanding -nostdlib $(ML_INCLUDE) $(USER_CFLAGS)
+CXXFLAGS := -G0 -O3 -ffreestanding -fno-rtti -fno-exceptions -nostdlib $(ML_INCLUDE) $(USER_CFLAGS) $(USER_CXXFLAGS)
 
 BINDIR := bin
 OBJDIR := obj
