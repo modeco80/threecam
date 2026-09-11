@@ -1,7 +1,6 @@
 #ifndef BX_MISCAPP_H
 #define BX_MISCAPP_H
 
-#include <ml/types.h>
 #include <bx/math.h>
 
 // dumping ground for misc. things
@@ -11,8 +10,8 @@ class cFont;
 
 class cRider {
 public:
-	u8 state[4];
-	u8 substate[4];
+	u32 state;
+	u32 substate;
 	u8 HACKpad[0x58];
 	u8 pad[0xb0];
 	t4Vector position;
@@ -20,6 +19,8 @@ public:
 	void setPosition(const t4Vector& pos) {
 		position = pos;
 	}
+
+	void putAt(const t4Vector& v1, const t4Vector& v2, float funk, u32 animId);
 };
 
 class cAI {

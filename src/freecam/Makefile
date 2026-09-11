@@ -17,6 +17,7 @@ SOURCES := \
 	$(RUNTIME) \
 	$(UTILS) \
 	main.cpp \
+	ui/hudrenderstate.cpp \
 	ui/freecamhud.cpp
 
 LINKSCRIPT = $(OBJDIR)/freecam_blob.ld

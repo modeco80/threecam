@@ -8,7 +8,7 @@ const static u32 kMaxNotifications = 4;
 
 class HUDRenderState; // Internal class
 
-/// The freecam HUD. Displays
+/// The freecam HUD.
 class FreecamHUD {
 	struct Notification {
 		char* textStr; // NOTE: mlStrDup()'d from caller

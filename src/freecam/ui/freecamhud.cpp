@@ -9,6 +9,8 @@
 #include <bx/miscapp.h>
 #include "../bxhelpers.hpp"
 
+#include "hudrenderstate.hpp"
+
 extern cCamera* manualCam;
 
 #ifdef MOD_REGION_usa
@@ -24,7 +26,7 @@ inline f32 lerpf(f32 start, f32 end, f32 t) {
 }
 
 /// Lerps two colors.
-static tARGB argbLerp(const tARGB& startColor, const tARGB& endColor, f32 t) {
+inline tARGB argbLerp(const tARGB& startColor, const tARGB& endColor, f32 t) {
 	return tARGB(lerpf(startColor.a, endColor.a, t), lerpf(startColor.r, endColor.r, t), lerpf(startColor.g, endColor.g, t), lerpf(startColor.b, endColor.b, t));
 }
 
@@ -32,52 +34,6 @@ const static tARGB HUD_COLOR = tARGB(1.f, (214.f/255.f), (141.f/255.f), (6.f/255
 const static tARGB HUD_SHADOW_COLOR = tARGB(1.f, (84.f/255.f), (57.f/255.f), (2.f/255.f));
 const static tARGB NOTIFICATION_DEAD_COLOR = tARGB(0.1f, (84.f/255.f), (57.f/255.f), (2.f/255.f));
 const static tARGB NOTIFICATION_DEAD_SHADOW_COLOR = tARGB(0.1f, (33.f/255.f), (23.f/255.f), (2.f/255.f));
-
-class HUDRenderState {
-	t2Vector savedShadowOffset;
-	tARGB savedFontColor;
-	tARGB savedShadowColor;
-	t2Vector savedScale;
-
-	cFont* pFont;
-public:
-
-	HUDRenderState() {
-		pFont = getGame()->debugFont;
-	}
-
-	void push() {
-		savedScale = pFont->scale;
-		savedFontColor = pFont->color;
-		savedShadowOffset = pFont->shadowOffset;
-		savedShadowColor = pFont->shadowColor;
-	}
-
-	void setFontColor(const tARGB& color) {
-		pFont->color = color;
-	}
-
-	void setShadowColor(const tARGB& color) {
-		pFont->shadowColor = color;
-	}
-
-	void setShadowOffset(const t2Vector& offset) {
-		pFont->shadowOffset = offset;
-	}
-
-	void setScale(const t2Vector& scale) {
-		pFont->scale = scale;
-	}
-
-	cFont* getFont() const {  return pFont; }
-
-	void pop() {
-		pFont->scale = savedScale;
-		pFont->color = savedFontColor;
-		pFont->shadowColor = savedShadowColor;
-		pFont->shadowOffset = savedShadowOffset;
-	}
-};
 
 void FreecamHUD::Notification::purge() {
 	if(this->textStr != nil(char*))
@@ -90,7 +46,6 @@ void FreecamHUD::Notification::purge() {
 float FreecamHUD::Notification::lerpTime() {
 	return static_cast<float>(tickCounter) / static_cast<float>(tickLength);
 }
-
 
 FreecamHUD::Notification* FreecamHUD::allocNotification() {
 	// If we can't allocate any more notifications...
@@ -155,31 +110,30 @@ void FreecamHUD::update() {
 }
 
 void FreecamHUD::render() {
-	HUDRenderState rs;
 	const t4Vector& riderPos = getRider(0)->position;
 	const t4Vector& cameraPos = manualCam->pManualCamController->pManualAlgo->position;
 
 	// Begin rendering
-	rs.push();
+	pRenderState->save();
 		// Setup font rendering
-		rs.setFontColor(HUD_COLOR);
-		rs.setShadowColor(HUD_SHADOW_COLOR);
-		rs.setShadowOffset(t2Vector(2.f, 1.f));
-		rs.setScale(t2Vector(1.f, 1.f));
+		pRenderState->setFontColor(HUD_COLOR);
+		pRenderState->setShadowColor(HUD_SHADOW_COLOR);
+		pRenderState->setShadowOffset(t2Vector(2.f, 1.f));
+		pRenderState->setScale(t2Vector(1.f, 1.f));
 
-		rs.getFont()->text(10.f, 20.f, "3Cam Active");
-		rs.getFont()->textf(10.f, 40.f, "Rider pos (%0.4f, %0.4f, %0.4f)", riderPos.x(), riderPos.y(), riderPos.z());
-		rs.getFont()->textf(10.f, 60.f, "Camera pos (%0.4f, %0.4f, %0.4f)", cameraPos.x(), cameraPos.y(), cameraPos.z());
+		pRenderState->getFont()->text(10.f, 20.f, "3Cam Active");
+		pRenderState->getFont()->textf(10.f, 40.f, "Rider pos (%0.4f, %0.4f, %0.4f)", riderPos.x(), riderPos.y(), riderPos.z());
+		pRenderState->getFont()->textf(10.f, 60.f, "Camera pos (%0.4f, %0.4f, %0.4f)", cameraPos.x(), cameraPos.y(), cameraPos.z());
 
 		// Render notifications.
 		if(activeNotificationCount) {
 			for(u32 i = 0; i < activeNotificationCount; ++i) {
-				rs.setFontColor(argbLerp(HUD_COLOR, NOTIFICATION_DEAD_COLOR, activeNotifications[i].lerpTime()));
-				rs.setShadowColor(argbLerp(HUD_SHADOW_COLOR, NOTIFICATION_DEAD_SHADOW_COLOR, activeNotifications[i].lerpTime()));
-				rs.getFont()->text(10.f, 320.f + (i * 20.f), activeNotifications[i].textStr);
+				pRenderState->setFontColor(argbLerp(HUD_COLOR, NOTIFICATION_DEAD_COLOR, activeNotifications[i].lerpTime()));
+				pRenderState->setShadowColor(argbLerp(HUD_SHADOW_COLOR, NOTIFICATION_DEAD_SHADOW_COLOR, activeNotifications[i].lerpTime()));
+				pRenderState->getFont()->text(10.f, 320.f + (i * 20.f), activeNotifications[i].textStr);
 			}
 		}
-	rs.pop();
+	pRenderState->restore();
 }
 
 void FreecamHUD::addNotification(const char* pszNotificationText, f32 timeSeconds) {

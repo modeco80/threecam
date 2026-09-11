@@ -47,3 +47,6 @@ render__5cGame = 0x0022b008;
 /* cFont */
 text__5cFontffPCc = 0x00391cb0;
 textf__5cFontffPCce = 0x001dc990;
+
+/* cRider */
+putAt__6cRiderRC8t4VectorT1fUi = 0x0011d660;

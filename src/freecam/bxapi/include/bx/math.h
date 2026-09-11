@@ -33,6 +33,13 @@ struct t3Vector {
 struct t4Vector {
 	float v[4];
 
+	t4Vector() {
+		v[0] = 0.f;
+		v[1] = 0.f;
+		v[2] = 0.f;
+		v[3] = 1.f;
+	}
+
 	float x() const {
 		return v[0];
 	}

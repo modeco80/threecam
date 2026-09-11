@@ -17,6 +17,7 @@ FreecamHUD* freecamHUD = nil(FreecamHUD*);
 u16 lastHudFlags = 0;
 extern u16 gHudFlags;
 
+
 void freecamResetPosition() {
 	t4Vector pos = getRider(0)->position;
 	// Push Z up a bit.
@@ -27,8 +28,9 @@ void freecamResetPosition() {
 void freecamHandleInputs() {
 	if(freecamInput->getState(eInputState_EditorHelp)) {
 		cRider* pRider = getRider(0);
-		pRider->state[0] = 3;
-		pRider->substate[0] = 1;
+		pRider->state = 0;
+		pRider->substate = 0;
+		//pRider->putAt(manualCam->getPosition(), manualCam->getPosition(), 0., 0);
 		pRider->setPosition(manualCam->getPosition());
 
 		if(hudEnabled) {
