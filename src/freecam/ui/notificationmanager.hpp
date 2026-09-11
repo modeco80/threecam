@@ -29,7 +29,7 @@ public:
 
 class NotificationManager {
 	friend class Notification;
-	StaticStringSlotPool<kMaxNotifications, kMaxNotificationTextLength-1> notifStringPool;
+	StaticStringSlotPool<kMaxNotifications, kMaxNotificationTextLength> notifStringPool;
 
 	Notification activeNotifications[kMaxNotifications];
 	u32 activeNotificationCount;
