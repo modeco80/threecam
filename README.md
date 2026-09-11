@@ -4,16 +4,24 @@ A free camera mod for SSX 3.
 
 # Controls
 
-**L3 + R2** = Toggle the free camera
-**Left Stick** = Aim camera
-**Right Stick** = Move camera
-**L2** = Slow down movement and aiming
-**R2** = Speed up movement and aiming
+| Keybind         | Action                         |
+|-----------------|--------------------------------|
+| **L3 + R2**     | Toggle the free camera         | 
+| **Left Stick**  | Aim camera                     |
+| **Right Stick** | Move camera                    |
+| **L2**          | Slow down movement and aiming  |
+| **R2**          | Speed up movement and aiming   |
 
 ## Extended Controls
-**R3** = Snap camera back to rider position
-**SELECT** = Snap rider to camera position (a bit buggy at the moment, and only works if the rider is on the ground, sorry...)
-**L1** = Toggle HUD (The HUD is another QoL feature 3Cam adds, which displays position for you, but for clean screenshots you can turn it off.)
+
+These controls are provided by the 3Cam mod and control its QoL features.
+
+| Keybind         | Action                             |
+|-----------------|------------------------------------|
+| **R3**          | Snap camera back to rider position | 
+| **SELECT**      | Snap rider to camera position      |
+| **Right Stick** | Move camera                        |
+| **L1**          | Toggle 3Cam HUD                    |
 
 # How does this mod work?
 
