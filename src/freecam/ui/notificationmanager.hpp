@@ -2,13 +2,17 @@
 #define THREECAM_UI_NOTIFICATIONMANAGER_HPP
 
 #include <ml/types.h>
+#include "staticstringslotpool.hpp"
 
 /// The max amount of notifications which are displayed on the HUD.
 const static u32 kMaxNotifications = 4;
 const static u32 kMaxNotificationTextLength = 64;
 
+class NotificationManager;
+
 class Notification {
 	friend class NotificationManager;
+	NotificationManager* pManager;
 	char* textStr;
 	u32 tickCounter;
 	u32 tickLength;
@@ -24,10 +28,13 @@ public:
 };
 
 class NotificationManager {
-	// TODO: Pool notification strings so they don't keep hitting the heap.
+	friend class Notification;
+	StaticStringSlotPool<kMaxNotifications, kMaxNotificationTextLength-1> notifStringPool;
 
 	Notification activeNotifications[kMaxNotifications];
 	u32 activeNotificationCount;
+
+	void freeString(char* psz);
 
 	/// Allocates a new notification.
 	Notification* allocNotification();

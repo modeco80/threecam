@@ -13,16 +13,22 @@ inline u32 secondsToTicks(f32 seconds) {
 	return static_cast<u32>(seconds * (kTicksPerSecond));
 }
 
+
 void Notification::purge() {
-	if(this->textStr != nil(char*))
-		mlFree(static_cast<void*>(this->textStr));
-	this->textStr = nil(char*);
+	if(this->textStr != nil(char*)) {
+		pManager->freeString(this->textStr);
+		this->textStr = nil(char*);
+	}
 	this->tickCounter = 0xffffffff;
 	this->tickLength = 0xffffffff;
 }
 
 float Notification::lerpTime() const {
 	return static_cast<float>(tickCounter) / static_cast<float>(tickLength);
+}
+
+void NotificationManager::freeString(char* psz) {
+	notifStringPool.free(psz);
 }
 
 Notification* NotificationManager::allocNotification() {
@@ -106,7 +112,8 @@ void NotificationManager::addNotification(const char* pszNotificationText, f32 t
 #endif
 
 	// Set up the notification
-	pNotification->textStr = mlStrDup(pszNotificationText);
+	pNotification->pManager = this;
+	pNotification->textStr = notifStringPool.allocCopyString(pszNotificationText);
 	pNotification->tickCounter = 0;
 	pNotification->tickLength = secondsToTicks(timeSeconds);
 }
