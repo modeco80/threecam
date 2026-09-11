@@ -27,7 +27,7 @@ LINKLIBS := \
 	../ml/hw/obj/libml3_hw.a
 
 # User C/CXX flags.
-USER_CFLAGS = -DMOD_REGION_$(REGION) -I bxapi/include
+USER_CFLAGS = -DMOD_REGION_$(REGION) -I $(TOP)/src/bxapi/include
 USER_CXXFLAGS := \
 	-Wno-pmf-conversions
 

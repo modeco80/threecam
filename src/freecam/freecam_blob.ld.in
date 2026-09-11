@@ -1,6 +1,6 @@
 
 /* Include the api file */
-INCLUDE bxapi/ld/@REGION@.ld
+INCLUDE ../bxapi/ld/@REGION@.ld
 
 BLOB_LOAD_ADDRESS = 0x000a0000;
 

@@ -28,7 +28,7 @@ def main():
 	# Open the ELF file so we can get at symbols in it.
 	# Open the Region-specific LD file so we can grab other symbols we need too
 	elf = ElfWrapper(f'bin/ssx_3_cam_{sys.argv[2]}.elf')
-	ldScript = LdScript.new(f'bxapi/ld/{sys.argv[2]}.ld')
+	ldScript = LdScript.new(f'../bxapi/ld/{sys.argv[2]}.ld')
 
 	# Write the pnach out.
 	pnachAuthor = 'modeco80'
