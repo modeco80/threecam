@@ -4,7 +4,7 @@
 #include "trampoline.hpp"
 
 #define FUNC_HOOK0(funcName, ret)                                                             \
-	class Hook_##funcName {                                                                   \
+	static class Hook_##funcName {                                                            \
 		HookHandle handle;                                                                    \
 		ret (*original)();                                                                    \
 		static ret hookImpl();                                                                \
@@ -18,7 +18,7 @@
 	ret Hook_##funcName::hookImpl()
 
 #define FUNC_HOOK(funcName, ret, ...)                                                         \
-	class Hook_##className##_##funcName {                                                     \
+	static class Hook_##className##_##funcName {                                              \
 		HookHandle handle;                                                                    \
 		ret (*original)(__VA_ARGS__);                                                         \
 		static ret hookImpl(__VA_ARGS__);                                                     \

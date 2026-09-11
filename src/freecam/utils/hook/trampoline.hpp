@@ -5,7 +5,12 @@
 
 typedef void* HookHandle;
 
-/// Does a trampoline hook.
+/// Does a trampoline hook at the target function pointed to by [pTarget].
+/// [pHook] is a pointer to the hook function.
+///
+/// If [ppTrampoline] is not nil, the pointer to a trampoline thunk which allows
+/// calling the original code again will be provided.
+///
 /// Returns a hook handle, or nil(HookHandle) on error.
 ///
 /// # Notes
