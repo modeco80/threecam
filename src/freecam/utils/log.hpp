@@ -7,8 +7,18 @@ enum LogLevel {
 	LogErr
 };
 
-void utilLog(LogLevel level, const char* pszMessage);
+//#define LOG_ENABLED
 
+#ifdef LOG_ENABLED
+
+void utilLog(LogLevel level, const char* pszMessage);
 void utilLogf(LogLevel level, const char* pszMessage, ...);
+
+#else
+
+#define utilLog(level, m) (void)0
+#define utilLogf(level, m, ...) (void)0
+
+#endif
 
 #endif

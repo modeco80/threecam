@@ -1,4 +1,5 @@
 #include "log.hpp"
+#ifdef LOG_ENABLED
 
 #include <ml/abort.h>
 #include <ml/string.h>
@@ -37,3 +38,5 @@ void utilLogf(LogLevel level, const char* pszMessage, ...) {
 	utilLogv(level, pszMessage, val);
 	va_end(val);
 }
+
+#endif
