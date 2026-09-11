@@ -50,3 +50,4 @@ textf__5cFontffPCce = 0x001dc990;
 
 /* cRider */
 putAt__6cRiderRC8t4VectorT1fUi = 0x0011d660;
+cleanupAfterPutAt__6cRiderb = 0x0011df18;

@@ -21,6 +21,7 @@ public:
 	}
 
 	void putAt(const t4Vector& v1, const t4Vector& v2, float funk, u32 animId);
+	void cleanupAfterPutAt(bool bUnk);
 };
 
 class cAI {
