@@ -7,7 +7,7 @@ enum LogLevel {
 	LogErr
 };
 
-//#define LOG_ENABLED
+#define LOG_ENABLED
 
 #ifdef LOG_ENABLED
 
