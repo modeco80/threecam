@@ -1,35 +1,20 @@
 #ifndef THREECAM_UI_FREECAMHUD_HPP
 #define THREECAM_UI_FREECAMHUD_HPP
 
-#include <ml/cxx/fixedvec.hpp>
-
-/// The max amount of notifications which are displayed on the HUD.
-const static u32 kMaxNotifications = 4;
+#include <ml/types.h>
 
 class HUDRenderState; // Internal class
+class Notification;
+class NotificationManager;
 
 /// The freecam HUD.
 class FreecamHUD {
-	struct Notification {
-		char* textStr; // NOTE: mlStrDup()'d from caller
-		u32 tickCounter;
-		u32 tickLength;
-
-		void purge();
-		float lerpTime();
-	};
-
 	HUDRenderState* pRenderState;
+	NotificationManager* pNotificationManager;
 
-	Notification activeNotifications[kMaxNotifications];
-	u32 activeNotificationCount;
+	void renderNotification(const Notification& notif, u32 index);
 
-	/// Allocates a new notification. Returns nil if no notification slots are free.
-	Notification* allocNotification();
-
-	/// Removes a previously allocated notification.
-	void removeNotification(Notification* pNotif);
-
+	static void renderNotificationCbThunk(const Notification& notif, u32 index, void* user);
 public:
 	FreecamHUD();
 	~FreecamHUD();
