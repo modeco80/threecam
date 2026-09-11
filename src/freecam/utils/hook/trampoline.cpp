@@ -22,7 +22,7 @@ namespace {
 	// Only bump this up if we reallllly have to :(
 	ml::FreeList<HookData, 32> hookList;
 
-	HookData* allocHook(void* pTarget) {
+	inline HookData* allocHook(void* pTarget) {
 		HookData* hook = hookList.allocate();
 		if(hook == nil(HookData*)) {
 			mlASSERT(false && "Out of free hooks, increase the freelist size!");
@@ -34,7 +34,7 @@ namespace {
 		return hook;
 	}
 
-	void freeHook(HookData* hook) {
+	inline void freeHook(HookData* hook) {
 		hookList.free(hook);
 	}
 
